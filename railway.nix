@@ -1,5 +1,5 @@
 { pkgs }: {
-   packages = [
-       pkgs.ffmpeg
-     ];
+  packages = [
+    pkgs.ffmpeg
+  ];
 }
