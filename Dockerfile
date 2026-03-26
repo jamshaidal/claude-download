@@ -23,11 +23,14 @@ RUN apt-get update && apt-get install -y \
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
-COPY backend/ ./
+# Copy backend code to /app/backend
+COPY backend/ ./backend/
 
-# Copy frontend build from builder stage
-COPY --from=builder /app/dist ../frontend/dist
+# Copy frontend build from builder stage to /app/frontend/dist
+COPY --from=builder /app/dist ./frontend/dist
+
+# Change to backend directory for running the app
+WORKDIR /app/backend
 
 # Create downloads directory
 RUN mkdir -p downloads
