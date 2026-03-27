@@ -248,8 +248,14 @@ def serve_react(path):
 
 # Run cleanup on startup (works for both gunicorn and python app.py)
 cleanup_old_files()
-print(f"Starting server...")
-print(f"Download folder: {DOWNLOAD_FOLDER}")
+print(f"[STARTUP] Starting server...", flush=True)
+print(f"[STARTUP] Download folder: {DOWNLOAD_FOLDER}", flush=True)
+print(f"[STARTUP] Static folder: {app.static_folder}", flush=True)
+print(f"[STARTUP] Static folder exists: {os.path.exists(app.static_folder)}", flush=True)
+if os.path.exists(app.static_folder):
+    print(f"[STARTUP] Files in static folder: {os.listdir(app.static_folder)}", flush=True)
+print(f"[STARTUP] Expected index.html at: {os.path.join(app.static_folder, 'index.html')}", flush=True)
+print(f"[STARTUP] Index exists: {os.path.isfile(os.path.join(app.static_folder, 'index.html'))}", flush=True)
 
 if __name__ == '__main__':
     # Use Railway's PORT environment variable, default to 5000
