@@ -7,7 +7,11 @@ from flask import Flask, request, jsonify, send_file, Response, stream_with_cont
 from flask_cors import CORS
 import yt_dlp
 
-app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
+# Determine absolute path to frontend dist directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIST = os.path.join(BASE_DIR, '..', 'frontend', 'dist')
+
+app = Flask(__name__, static_folder=FRONTEND_DIST, static_url_path='/')
 CORS(app)
 
 # Configuration
