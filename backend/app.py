@@ -242,13 +242,12 @@ def serve_react(path):
         return send_from_directory(app.static_folder, 'index.html')
 
 
+# Run cleanup on startup (works for both gunicorn and python app.py)
+cleanup_old_files()
+print(f"Starting server...")
+print(f"Download folder: {DOWNLOAD_FOLDER}")
+
 if __name__ == '__main__':
-    # Run cleanup on startup
-    cleanup_old_files()
-
-    print(f"Starting server...")
-    print(f"Download folder: {DOWNLOAD_FOLDER}")
-
     # Use Railway's PORT environment variable, default to 5000
     port = int(os.environ.get('PORT', 5000))
     print(f"Server running on http://localhost:{port}")
